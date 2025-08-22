@@ -139,3 +139,4 @@ This project is open source and available under the MIT License.
 ## Support
 
 For questions or issues, please check the troubleshooting section above or create an issue in the project repository.
+
