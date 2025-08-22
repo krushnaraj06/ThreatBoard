@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<get_results_response status="200" status_text="OK">
+  <result id="12345678-1234-5678-9abc-123456789012">
+    <name>Apache HTTP Server Multiple Vulnerabilities</name>
+    <host>192.168.1.100</host>
+    <port>80/tcp</port>
+    <nvt oid="1.3.6.1.4.1.25623.1.0.147890">
+      <name>Apache HTTP Server Multiple Vulnerabilities</name>
+      <summary>The remote Apache HTTP Server is prone to multiple vulnerabilities.</summary>
+      <refs>
+        <ref type="cve" id="CVE-2023-25690"/>
+        <ref type="cve" id="CVE-2023-27522"/>
+      </refs>
+    </nvt>
+    <description>Apache HTTP Server versions 2.4.0 through 2.4.55 are affected by multiple vulnerabilities including HTTP request smuggling and mod_proxy_uwsgi HTTP response splitting.</description>
+    <severity>7.5</severity>
+    <threat>High</threat>
+    <creation_time>2023-03-15T10:30:00Z</creation_time>
+  </result>
+  
+  <result id="87654321-4321-8765-cba9-987654321098">
+    <name>OpenSSL Multiple Vulnerabilities</name>
+    <host>192.168.1.101</host>
+    <port>443/tcp</port>
+    <nvt oid="1.3.6.1.4.1.25623.1.0.148123">
+      <name>OpenSSL Multiple Vulnerabilities</name>
+      <summary>The remote OpenSSL installation is affected by multiple vulnerabilities.</summary>
+      <refs>
+        <ref type="cve" id="CVE-2023-0464"/>
+        <ref type="cve" id="CVE-2023-0465"/>
+        <ref type="cve" id="CVE-2023-0466"/>
+      </refs>
+    </nvt>
+    <description>OpenSSL versions before 3.1.1, 3.0.9, and 1.1.1u are vulnerable to excessive resource consumption during certificate verification and policy processing.</description>
+    <severity>5.3</severity>
+    <threat>Medium</threat>
+    <creation_time>2023-03-28T14:20:00Z</creation_time>
+  </result>
+  
+  <result id="11111111-2222-3333-4444-555555555555">
+    <name>MySQL Server Multiple Vulnerabilities</name>
+    <host>192.168.1.102</host>
+    <port>3306/tcp</port>
+    <nvt oid="1.3.6.1.4.1.25623.1.0.148456">
+      <name>MySQL Server Multiple Vulnerabilities</name>
+      <summary>The remote MySQL server is affected by multiple vulnerabilities.</summary>
+      <refs>
+        <ref type="cve" id="CVE-2023-21980"/>
+        <ref type="cve" id="CVE-2023-21977"/>
+      </refs>
+    </nvt>
+    <description>MySQL Server versions 8.0.32 and earlier are vulnerable to unauthorized access and privilege escalation attacks.</description>
+    <severity>8.8</severity>
+    <threat>High</threat>
+    <creation_time>2023-04-18T09:15:00Z</creation_time>
+  </result>
+  
+  <result id="99999999-8888-7777-6666-555555555555">
+    <name>Docker Engine Privilege Escalation</name>
+    <host>192.168.1.103</host>
+    <port>2376/tcp</port>
+    <nvt oid="1.3.6.1.4.1.25623.1.0.148789">
+      <name>Docker Engine Privilege Escalation</name>
+      <summary>The remote Docker Engine is vulnerable to privilege escalation.</summary>
+      <refs>
+        <ref type="cve" id="CVE-2023-28840"/>
+        <ref type="cve" id="CVE-2023-28841"/>
+      </refs>
+    </nvt>
+    <description>Docker Engine versions before 23.0.3 allow attackers to escape container isolation and gain host privileges through malicious container images.</description>
+    <severity>9.0</severity>
+    <threat>Critical</threat>
+    <creation_time>2023-03-29T16:45:00Z</creation_time>
+  </result>
+  
+  <result id="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee">
+    <name>Nginx HTTP Request Smuggling</name>
+    <host>192.168.1.104</host>
+    <port>80/tcp</port>
+    <nvt oid="1.3.6.1.4.1.25623.1.0.148999">
+      <name>Nginx HTTP Request Smuggling</name>
+      <summary>The remote Nginx server is vulnerable to HTTP request smuggling.</summary>
+      <refs>
+        <ref type="cve" id="CVE-2023-44487"/>
+      </refs>
+    </nvt>
+    <description>Nginx versions before 1.25.2 are vulnerable to HTTP/2 rapid reset attacks that can lead to denial of service conditions.</description>
+    <severity>7.5</severity>
+    <threat>High</threat>
+    <creation_time>2023-10-10T11:30:00Z</creation_time>
+  </result>
+</get_results_response>

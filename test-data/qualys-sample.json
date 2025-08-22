@@ -1,0 +1,109 @@
+{
+  "SCAN": {
+    "HEADER": {
+      "SCAN_DATETIME": "2023-11-15T10:30:00Z",
+      "SCAN_TITLE": "Production Network Vulnerability Scan"
+    },
+    "IP": [
+      {
+        "value": "10.0.1.50",
+        "VULN": [
+          {
+            "QID": "370001",
+            "CVE_ID": "CVE-2023-4863",
+            "TITLE": "Google Chrome WebP Heap Buffer Overflow",
+            "DIAGNOSIS": "Google Chrome versions prior to 116.0.5845.187 contain a heap buffer overflow in WebP image processing that could allow remote code execution.",
+            "CONSEQUENCE": "A remote attacker could exploit this vulnerability to execute arbitrary code in the context of the browser process.",
+            "SEVERITY": "4",
+            "CVSS_SCORE": "8.8",
+            "CVSS_BASE": "8.8",
+            "EXPLOITABILITY": "Exploitable",
+            "PORT": "80",
+            "FIRST_FOUND": "2023-09-11T00:00:00Z",
+            "LAST_FOUND": "2023-11-15T10:30:00Z"
+          },
+          {
+            "QID": "370002",
+            "CVE_ID": "CVE-2023-36884",
+            "TITLE": "Microsoft Office and Windows HTML Remote Code Execution",
+            "DIAGNOSIS": "Microsoft Office and Windows HTML components are vulnerable to remote code execution when processing specially crafted documents.",
+            "CONSEQUENCE": "An attacker could execute arbitrary code with the privileges of the victim user by convincing them to open a malicious document.",
+            "SEVERITY": "5",
+            "CVSS_SCORE": "9.8",
+            "CVSS_BASE": "9.8",
+            "EXPLOITABILITY": "Exploitable",
+            "PORT": "445",
+            "FIRST_FOUND": "2023-07-11T00:00:00Z",
+            "LAST_FOUND": "2023-11-15T10:30:00Z"
+          }
+        ]
+      },
+      {
+        "value": "10.0.1.51",
+        "VULN": [
+          {
+            "QID": "370003",
+            "CVE_ID": "CVE-2023-38408",
+            "TITLE": "OpenSSH Remote Code Execution",
+            "DIAGNOSIS": "OpenSSH versions before 9.3p2 are vulnerable to remote code execution through ssh-agent forwarding.",
+            "CONSEQUENCE": "A remote attacker with access to the ssh-agent socket could potentially execute arbitrary code on the target system.",
+            "SEVERITY": "3",
+            "CVSS_SCORE": "9.8",
+            "CVSS_BASE": "9.8",
+            "EXPLOITABILITY": "Not Exploitable",
+            "PORT": "22",
+            "FIRST_FOUND": "2023-07-19T00:00:00Z",
+            "LAST_FOUND": "2023-11-15T10:30:00Z"
+          },
+          {
+            "QID": "370004",
+            "CVE_ID": "CVE-2023-32315",
+            "TITLE": "Postfix SMTP Smuggling",
+            "DIAGNOSIS": "Postfix versions before 3.8.2 are vulnerable to SMTP smuggling attacks that can bypass security controls.",
+            "CONSEQUENCE": "An attacker could bypass email security filters and deliver malicious content to recipients.",
+            "SEVERITY": "2",
+            "CVSS_SCORE": "5.3",
+            "CVSS_BASE": "5.3",
+            "EXPLOITABILITY": "Not Exploitable",
+            "PORT": "25",
+            "FIRST_FOUND": "2023-12-01T00:00:00Z",
+            "LAST_FOUND": "2023-11-15T10:30:00Z"
+          }
+        ]
+      },
+      {
+        "value": "10.0.1.52",
+        "VULN": [
+          {
+            "QID": "370005",
+            "CVE_ID": "CVE-2023-46604",
+            "TITLE": "Apache ActiveMQ Remote Code Execution",
+            "DIAGNOSIS": "Apache ActiveMQ versions 5.18.0 through 5.18.2 are vulnerable to remote code execution through deserialization of untrusted data.",
+            "CONSEQUENCE": "A remote unauthenticated attacker could execute arbitrary code on the ActiveMQ server.",
+            "SEVERITY": "5",
+            "CVSS_SCORE": "10.0",
+            "CVSS_BASE": "10.0",
+            "EXPLOITABILITY": "Exploitable",
+            "PORT": "61616",
+            "FIRST_FOUND": "2023-10-27T00:00:00Z",
+            "LAST_FOUND": "2023-11-15T10:30:00Z"
+          },
+          {
+            "QID": "370006",
+            "CVE_ID": "CVE-2023-42793",
+            "TITLE": "JetBrains TeamCity Authentication Bypass",
+            "DIAGNOSIS": "JetBrains TeamCity versions before 2023.05.4 contain an authentication bypass vulnerability that allows unauthorized access to the server.",
+            "CONSEQUENCE": "An unauthenticated attacker could gain administrative access to the TeamCity server and potentially execute code.",
+            "SEVERITY": "5",
+            "CVSS_SCORE": "9.8",
+            "CVSS_BASE": "9.8",
+            "EXPLOITABILITY": "Exploitable",
+            "PORT": "8111",
+            "FIRST_FOUND": "2023-09-19T00:00:00Z",
+            "LAST_FOUND": "2023-11-15T10:30:00Z"
+          }
+        ]
+      }
+    ]
+  }
+}

